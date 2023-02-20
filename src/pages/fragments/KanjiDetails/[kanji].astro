@@ -1,0 +1,32 @@
+---
+const { kanji } = Astro.params;
+const url = `https://kanjiapi.dev/v1/kanji/${kanji}`;
+
+const response = await fetch(url);
+const data = await response.json();
+
+export async function getStaticPaths() {    
+  return data.map(({ kanji }) => {
+    return {
+      params: { kanji },
+    };
+  });
+}
+---
+<h1>Kanji {kanji}</h1>
+<div class="kanji-info border-b border-gray-800">
+    <div class="container mx-auto px-4 py-16 flex flex-col md:flex-row">
+        <div class="md:ml-24">
+            <h2 class="text-4xl mt-4 md:mt-0 mb-2 font-semibold">{data.kanji}</h2>
+            <div class="flex flex-wrap items-center text-gray-400 text-sm">
+                <span class="ml-1">Grade: {data.grade}</span>
+                <span class="ml-1">Strokes: {data.stroke_count}</span>
+                <span class="ml-1">JLPT: {data.jlpt}</span><br>
+                <span class="ml-1">Kun: {data.kun_readings}</span><br>
+                <span class="ml-1">On: {data.on_readings}</span><br>
+                <span class="ml-1">Names: {data.name_readings}</span><br>
+                <span class="ml-1">Meanings: {data.meanings}</span>
+            </div>
+        </div>
+    </div>
+</div>

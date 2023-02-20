@@ -1,0 +1,24 @@
+---
+import KanjiCard from '../../../components/KanjiCard.astro'
+
+const kanjiResponse = await fetch(
+  'https://kanjiapi.dev/v1/kanji/joyo'
+)
+const kanjiData = await kanjiResponse.json()
+---
+
+<div class="container mx-auto px-4 pt-16 mb-16">
+  <div class="popular-kanji">
+    <h2 class="uppercase tracking-wider text-orange-500 text-lg font-semibold">
+      Kanji
+    </h2>
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8"
+    >
+    <ul>
+      <!-- {kanjiData.map((kanjiData) => <KanjiCard Kanji={kanjiData} />)} -->
+      {kanjiData.map((kanjiData) => <li><a href={`/kanji/${kanjiData}`}>{kanjiData}</a></li> )}
+    </ul>
+    </div>
+  </div>
+</div>
