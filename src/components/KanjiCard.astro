@@ -1,0 +1,12 @@
+---
+const { kanji } = Astro.props;
+---
+
+<div class="mt-8">
+  <a href={`/kanji/${kanji}`}>
+    {kanji}k
+  </a>
+  <div class="mt-2">
+      <a href={`/kanji/${kanji}`} class="text-lg mt-2 hover:text-gray-300">{kanji}</a>
+  </div>
+</div>
